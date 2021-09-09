@@ -13,7 +13,7 @@ vi .gitmodules
 vi .git/config
 rm -rf .git/modules/themes/gohugo-theme-ananke
 
-
-git submodule add https://github.com/zhaohuabing/hugo-theme-cleanwhite.git themes/hugo-theme-cleanwhite
+git submodule add https://github.com/yuebaix/hugo-theme-cleanwhite.git themes/hugo-theme-cleanwhite
+# git submodule add https://github.com/zhaohuabing/hugo-theme-cleanwhite.git themes/hugo-theme-cleanwhite
 cp -r themes/hugo-theme-cleanwhite/exampleSite/** .
 

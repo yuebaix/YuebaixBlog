@@ -1,6 +1,6 @@
 ---
-title: "Posts Archive"
+title: "往期回顾"
 layout: archive
 type: post
-description: Archive of historical posts.
+description: 历史发布的文章
 ---
