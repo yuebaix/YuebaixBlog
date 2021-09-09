@@ -44,4 +44,5 @@ jobs:
           external_repository: yuebaix/yuebaix.github.io
           publish_branch: main
           publish_dir: ./public
+          cname: blog.yuebaix.com
 
