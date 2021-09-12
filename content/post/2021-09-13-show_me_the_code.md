@@ -1,5 +1,5 @@
 ---
-title:       "Show_me_the_code"
+title:       "Show Me The Code"
 subtitle:    "光说太容易了，写出代码展示一下吧。"
 description: ""
 author:      "月白"

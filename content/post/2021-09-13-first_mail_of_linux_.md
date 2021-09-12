@@ -1,5 +1,5 @@
 ---
-title:       "Linux_first_mail"
+title:       "First Mail Of Linux"
 subtitle:    "linux开源的第一封信"
 description: ""
 author:      "月白"

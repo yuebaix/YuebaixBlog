@@ -6,8 +6,11 @@ languageCode = "zh-CN"
 disqusShortname = ""
 googleAnalytics = ""
 preserveTaxonomyNames = true
-paginate = 5 #frontpage pagination
+paginate = 10 #frontpage pagination
 hasCJKLanguage = true
+
+[permalinks]
+  post = "/:year/:month/:day/:title/"
 
 [outputs]
 #home = ["HTML", "RSS", "Algolia"]
