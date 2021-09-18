@@ -22,6 +22,12 @@
     * [Stackoverflow](https://stackoverflow.com/)
     * [Iteye](https://www.iteye.com/)
     * [博客园](https://www.cnblogs.com/)
+* 技术团队博客
+    * [Netflix技术博客](https://netflixtechblog.com/)
+    * [美团技术团队](https://tech.meituan.com/)
+    * [Dropbox技术博客](https://dropbox.tech/)
+    * [360核心安全技术博客](https://blogs.360.cn/)
+    * [小米信息部技术团队](https://blogs.360.cn/)
 * 知识网站
     * [知乎](https://www.zhihu.com/)
     * [Quora](https://www.quora.com/)
@@ -49,3 +55,4 @@
     * [阮一峰github](https://github.com/ruanyf)
     * [廖雪峰](https://www.liaoxuefeng.com/)
     * [王垠](https://www.yinwang.org/)
+    * [鸟窝](https://colobu.com/)
