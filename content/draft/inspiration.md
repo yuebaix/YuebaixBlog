@@ -50,3 +50,19 @@ https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java
 
 
 发布中央仓库 https://www.cnblogs.com/linkstar/p/10289584.html
+
+1.测试greenwich
+2.getting started
+3.contribute guide
+4.ci方案(travis or github action)
+4.特性文档
+5.详细文档
+6.详细roadmap
+7.自动化测试方案
+8.代码风格控制
+
+1.golang 工程初始化
+2.golang 命令行工具
+3.vue项目初始化
+4.golang打包静态文件
+
