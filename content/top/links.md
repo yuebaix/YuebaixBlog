@@ -56,3 +56,13 @@
     * [廖雪峰](https://www.liaoxuefeng.com/)
     * [王垠](https://www.yinwang.org/)
     * [鸟窝](https://colobu.com/)
+* 在线简易设计网站
+    * [徽章生成：shields.io](https://shields.io/)
+    * [文字logo生成：flamingtext](https://www.flamingtext.com/)
+    * [字符画Logo生成：ASCII Generator](http://www.network-science.de/ascii/)
+    * [字符画Logo生成：taag](http://patorjk.com/software/taag/)
+    * [图片字符画生成：fontke](https://en.m.fontke.com/tool/image2ascii/)
+    * [图片字符画生成：程默的博客文字工具](http://life.chacuo.net/convertphoto2char/)
+    * [图片字符画生成：img2txt](https://www.degraeve.com/img2txt.php)
+    * [图片字符画生成：一个工具箱](http://www.atoolbox.net/)
+    
