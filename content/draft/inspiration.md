@@ -45,8 +45,8 @@ BRIGHT_MAGENTA：亮洋红色
 BRIGHT_CYAN：亮蓝绿色
 BRIGHT_WHITE：亮白色
 
+PanGuVersion开发
+https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java/com/baomidou/mybatisplus/core/MybatisPlusVersion.java
 
 
-
-
-
+发布中央仓库 https://www.cnblogs.com/linkstar/p/10289584.html
