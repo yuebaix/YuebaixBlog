@@ -66,3 +66,4 @@ https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java
 3.vue项目初始化
 4.golang打包静态文件
 
+sonatype 自动release插件
