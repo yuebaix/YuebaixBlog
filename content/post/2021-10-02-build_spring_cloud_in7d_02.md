@@ -1,7 +1,7 @@
 +++
 title       = "七天构建SpringCloud集群"
 subtitle    = "day2：基础设施搭建"
-description = ""
+description = "用docker-compose完成中间件搭建"
 author      = "月白"
 date        = 2021-10-02T19:00:00+08:00
 URL         = ""
