@@ -3,7 +3,7 @@ title       = "七天构建SpringCloud集群"
 subtitle    = "day1：系统设计"
 description = "背景目标、知识准备、系统设计、实施步骤"
 author      = "月白"
-date        = 2021-10-01T18:52:32+08:00
+date        = 2021-10-01T19:00:00+08:00
 URL         = ""
 image       = ""
 categories  = ["TECH"]
@@ -12,8 +12,8 @@ tags        = ["干货", "教程"]
 
 项目地址：[jiuzhou (九州) https://github.com/yuebaix/jiuzhou](https://github.com/yuebaix/jiuzhou)
 
-<a href="https://github.com/yuebaix/jiuzhou">
-    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=yuebaix&theme=highcontrast&repo=jiuzhou" />
+<a style="display: inline-block;width: 400px;height: 170px" href="https://github.com/yuebaix/jiuzhou">
+    <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=yuebaix&theme=highcontrast&repo=jiuzhou" />
 </a>
 
 ## 一、背景目标
