@@ -10,3 +10,32 @@ categories  = ["TECH"]
 tags        = ["干货", "教程"]
 +++
 
+## 一、安装 Docker Desktop
+
+创建桥接子网
+
+> docker network create -d bridge --subnet=172.18.0.0/16 --gateway 172.18.0.1 inner-network
+
+## 二、配置文件
+
+```yaml
+
+```
+
+## 三、常用命令
+
+
+
+## 四、比较折腾
+
+### 1.C盘爆了
+
+### 2.C盘又报了
+
+### 3.内存爆了
+
+### 4.被换行符坑了
+
+### 5.
+
+
