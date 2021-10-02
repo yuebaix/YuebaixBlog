@@ -66,7 +66,7 @@ home = ["HTML"]
   #custom_js = ["js/lightbox.js", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js", "js/main.js"]
 
   showtoc = false
-  show_footer = false
+  show_theme_copyright = false
 
   [params.social]
   #rss            = true
