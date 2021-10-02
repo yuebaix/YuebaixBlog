@@ -29,6 +29,7 @@ tags        = ["干货", "教程"]
 * zookeeper
 * ctrip apollo
 * xxljob
+* apisix
 * uaa oauth2
 
 ## 三、系统设计
