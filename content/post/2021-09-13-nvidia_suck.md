@@ -10,7 +10,7 @@ categories:  ["TECH"]
 tags:        ["传奇"]
 ---
 
-![nvidia_suck](/img/post/nvidia_suck.jpg)
+![nvidia_suck](/pic/2021_09_13/nvidia_suck.jpg)
 
 
 2012年6月14日，Linux系统创始人Linus Torvalds（对，这大神就叫Linus）在一个节目中与观众进行互动交流，在采访后的问答环节，一位现场女观众说她曾经买过一台笔记本，配备了Intel集成显卡和NVIDIA Geforce独立显卡，但在Linux系统下Optimus双卡切换功能得不到驱动支持，一直等到现在也没有，并就此询问Linus的看法。

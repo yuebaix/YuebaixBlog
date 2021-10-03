@@ -16,3 +16,67 @@ showtoc     = true
 <a style="display: inline-block;width: 400px;height: 170px" target="_blank" href="https://github.com/yuebaix/jiuzhou">
     <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=yuebaix&theme=highcontrast&repo=jiuzhou" />
 </a>
+
+## 一、完成服务注册功能
+
+1.引入zookeeper、spring-cloud-starter-zookeeper-discovery依赖
+
+```groovy
+ext {
+    zookeeperVersion = '3.7.0'
+}
+
+dependencyManagement {
+    dependency "org.apache.zookeeper:zookeeper:${zookeeperVersion}"
+}
+
+dependencies {
+    implementation('org.springframework.cloud:spring-cloud-starter-zookeeper-discovery') {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+    implementation ('org.apache.zookeeper:zookeeper') {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+}
+```
+
+2.配置文件application.properties添加服务发现配置
+
+```properties
+spring.application.name=app-bizagg
+
+spring.cloud.inetutils.preferredNetworks[0] = 192
+#spring.cloud.inetutils.preferredNetworks[1] = 172
+
+spring.cloud.zookeeper.connect-string=localhost:12181
+spring.cloud.zookeeper.discovery.enabled=true
+spring.cloud.zookeeper.discovery.register=true
+spring.cloud.zookeeper.discovery.root=/jiuzhou
+spring.cloud.zookeeper.discovery.instance-host=${spring.cloud.client.ip-address}
+
+server.port=12201
+```
+
+3.启动类添加服务发现注解 @EnableDiscoveryClient
+
+```java
+@EnableDiscoveryClient
+@SpringBootApplication
+public class BizAggApp {
+    public static void main(String[] args) {
+        SpringApplication.run(BizAggApp.class, args);
+    }
+}
+```
+
+4.改动变更到所有服务并进行启动测试
+
+![](/pic/2021_10_03/services_dashboard.png)
+
+![](/pic/2021_10_03/zkCli.png)
+
+![](/pic/2021_10_03/registry_json.png)
+
+## 二、完成swagger文档功能
+
+## 三、开发日志
