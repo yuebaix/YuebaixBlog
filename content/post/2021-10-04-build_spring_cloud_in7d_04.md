@@ -31,8 +31,9 @@ implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 ```java
 public interface BizFacadeConst {
-    String APP_BIZ = "app-biz";
     String SVC_UAA = "svc-uaa";
+    String APP_BIZ = "app-biz";
+    String APP_BIZAGG = "app-bizagg";
 }
 
 @FeignClient(name = BizFacadeConst.APP_BIZ, fallbackFactory = BizFeignClientFallbackFactory.class)
@@ -97,9 +98,9 @@ public class DemoController {
     @Value("${spring.application.name}")
     private String appName;
     @Autowired
-    private BizFeignClient bizFeignClient;
-    @Autowired
     private UaaFeignClient uaaFeignClient;
+    @Autowired
+    private BizFeignClient bizFeignClient;
 
     @ApiOperation("服务名称")
     @GetMapping("/appName")
@@ -107,16 +108,16 @@ public class DemoController {
         return appName;
     }
 
-    @ApiOperation("调用app-biz")
-    @GetMapping("/callAppBiz")
-    public String callAppBiz() {
-        return bizFeignClient.appName();
-    }
-
     @ApiOperation("调用svc-uaa")
     @GetMapping("/callSvcUaa")
     public String callSvcUaa() {
         return uaaFeignClient.appName();
+    }
+
+    @ApiOperation("调用app-biz")
+    @GetMapping("/callAppBiz")
+    public String callAppBiz() {
+        return bizFeignClient.appName();
     }
 }
 ```
@@ -131,10 +132,81 @@ public class DemoController {
 
 ### 3.在biz与bizclient中引入feign实现
 
+由于调用层级关系，controller有所不痛
+
+```java
+//biz中
+@Api(tags = "示例接口")
+@Slf4j
+@RestController
+@RequestMapping("/demo")
+public class DemoController {
+    @Value("${spring.application.name}")
+    private String appName;
+    @Autowired
+    private UaaFeignClient uaaFeignClient;
+
+    @ApiOperation("服务名称")
+    @GetMapping("/appName")
+    public String appName() {
+        return appName;
+    }
+
+    @ApiOperation("调用svc-uaa")
+    @GetMapping("/callSvcUaa")
+    public String callSvcUaa() {
+        return uaaFeignClient.appName();
+    }
+}
+```
+
+```java
+//bizclient中
+@Api(tags = "示例接口")
+@Slf4j
+@RestController
+@RequestMapping("/demo")
+public class DemoController {
+    @Value("${spring.application.name:app-bizclient}")
+    private String appName;
+    @Autowired
+    private UaaFeignClient uaaFeignClient;
+    @Autowired
+    private BizFeignClient bizFeignClient;
+    @Autowired
+    private BizAggFeignClient bizAggFeignClient;
+
+    @ApiOperation("服务名称")
+    @GetMapping("/appName")
+    public String appName() {
+        return appName;
+    }
+
+    @ApiOperation("调用svc-uaa")
+    @GetMapping("/callSvcUaa")
+    public String callSvcUaa() {
+        return uaaFeignClient.appName();
+    }
+
+    @ApiOperation("调用app-biz")
+    @GetMapping("/callAppBiz")
+    public String callAppBiz() {
+        return bizFeignClient.appName();
+    }
+
+    @ApiOperation("调用app-bizagg")
+    @GetMapping("/callAppBizagg")
+    public String callAppBizagg() {
+        return bizAggFeignClient.appName();
+    }
+}
+```
 
 ## 二、文档集中
 
+### 1.完成sys-gate对服务的路由
 
+### 2.完成swagger接口的路由配置
 
 ## 三、简单登陆
 
