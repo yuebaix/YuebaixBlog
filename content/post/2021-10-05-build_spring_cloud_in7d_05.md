@@ -1,7 +1,7 @@
 +++
 title       = "七天构建SpringCloud集群"
-subtitle    = "day5："
-description = "安全启动"
+subtitle    = "day5：安全启动"
+description = "基本安全、授权中心"
 author      = "月白"
 date        = 2021-10-05T19:00:00+08:00
 URL         = ""
