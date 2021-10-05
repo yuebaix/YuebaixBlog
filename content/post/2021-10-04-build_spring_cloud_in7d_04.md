@@ -393,7 +393,8 @@ spring:
 
 ### 4.总结
 
-到这里在线文档聚合这个功能就已经完善了。其实还可以实现一个GlobalFilter去添加自定义header，并在swagger插件中对自定义header进行识别转换inferredServer地址，此处主要为了最小化代码量完成功能。
+到这里在线文档聚合这个功能就已经完善了。其实还可以实现一个GlobalFilter去添加自定义header，并在swagger插件中对自定义header进行识别转换
+inferredServer地址，此处主要为了最小化代码量完成功能。
 
 ## 三、开发日志
 
@@ -427,3 +428,6 @@ spring:
 
 > 这个功能在早前swagger2.0的时候就已经支持了，在swagger3.0的webflux版本看着也是支持的，为什么在这个mvc版本不支持，有点令人疑惑，是不是也应该
 > 去提个issue来升级一下这个feature。
+
+> 去看了一下，现在springfox貌似是个印度人在维护，但是PR已经很久没有人合并了，不知道还能不能也不知道啥时候才会再release了，这个项目好像是
+> josh long参与发起的，不知道为啥转手出去了。如果这老哥被新冠缠住了，那也太让人难过了。
