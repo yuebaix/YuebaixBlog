@@ -206,7 +206,78 @@ public class DemoController {
 
 ### 1.完成sys-gate对服务的路由
 
+打开gate配置文件application.properties调试配置方便查看转发情况
+
+```properties
+logging.level.org.springframework.cloud.gateway=trace
+spring.cloud.gateway.httpclient.wiretap=true
+spring.cloud.gateway.httpserver.wiretap=true
+```
+
+properties配置路由比较suffer，干脆再加个application.yml来配置路由地址
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: route-app-bizagg
+          uri: lb://app-bizagg
+          predicates:
+            - Path=/app-bizagg/**
+          filters:
+            - StripPrefix=1
+        - id: route-app-biz
+          uri: lb://app-biz
+          predicates:
+            - Path=/app-biz/**
+          filters:
+            - StripPrefix=1
+```
+
+再提供一下application.properties路由的配置示例
+
+```properties
+spring.cloud.gateway.routes[0].id=app-bizagg-route
+spring.cloud.gateway.routes[0].uri=lb://app-bizagg
+spring.cloud.gateway.routes[0].predicates[0]=Path=/app-bizagg/**
+spring.cloud.gateway.routes[0].filters[0]=StripPrefix=1
+```
+
+这个时候gate对各个服务的请求就打通了，但是返回的文档内容没有前缀，无法访问到服务上，如果路由前缀跟服务contextPath一致的话应该已经通了，但是这里
+没有设置contextPath，比较受限，一会来解决这个问题。
+
 ### 2.完成swagger接口的路由配置
+
+先来解决文档/v3/api-docs返回的json中server地址无前缀的问题
+
+> 在线文档接口前缀可以自动根据请求地址来自动适配，原理是网关会将请求头*X-Forwarded-Prefix*进行叠加转发，springfox文档会自动根据这个header来
+> 进行适配。此次开发中，发现有两个变化，一个是gateway会自动将这个header在stripPrefix的插件时自动转发下来；一个是升级open api以后，springfox
+> 自己的mvc实现的controller把这个功能移除掉了，需要扩展变更上去才可使用。
+
+先设置*X-Forwarded-Prefix*的转发，实际这个地方默认就是这样的配置。
+
+```properties
+spring.cloud.gateway.x-forwarded.prefix-enabled=true
+spring.cloud.gateway.x-forwarded.prefix-append=true
+```
+
+由于springfox在inferredServer这个地方的处理是用spring plugin实现的，所以我们可以自己实现一个一样的插件在它处理出来的server url上添加前缀。
+springfox本身实现的plugin是优先级最高的，所以我们只要实现不配置顺序就可以了。由于各个业务可能都要用，所以就实现在了bizfacade包中。
+
+在bizfacade的gradle文件中新增依赖
+
+```groovy
+implementation 'javax.servlet:javax.servlet-api'
+implementation 'io.springfox:springfox-boot-starter'
+```
+
+在bizfacade中实现插件并导入SpringContext
+
+```java
+
+```
+
 
 ## 三、简单登陆
 
