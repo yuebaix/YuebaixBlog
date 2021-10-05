@@ -127,4 +127,6 @@ Voilà 这样我们就基本完成了文档的在线安全以及聚合，也可�
 
 > 看他的频道还有国外的天堂瀑布，真的是很美。但是回到家乡以后伤心的光景还是让人难过，这个世界每个人都被卡在一个边缘，跟谁都合不起来，只能自己孤独着。
 
-![](/pic/2021_10_05/ticktok_touching.png)
+<div class="clearfix">
+<img align="left" style="display: block" width="300px" src="/pic/2021_10_05/ticktok_touching.png" />
+</div>
