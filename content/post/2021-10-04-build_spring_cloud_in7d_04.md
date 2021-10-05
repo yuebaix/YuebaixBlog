@@ -132,7 +132,7 @@ public class DemoController {
 
 ### 3.在biz与bizclient中引入feign实现
 
-由于调用层级关系，controller有所不痛
+由于调用层级关系，controller有所不同
 
 ```java
 //biz中
@@ -275,14 +275,126 @@ implementation 'io.springfox:springfox-boot-starter'
 在bizfacade中实现插件并导入SpringContext
 
 ```java
+@Component
+public class WebMvcXForwardedPrefixOpenApiTransformationFilter implements WebMvcOpenApiTransformationFilter {
+    private static final String X_FORWARDED_PREFIX = "X-Forwarded-Prefix";
+    private static final String COMMA = ",";
 
+    @Override
+    public OpenAPI transform(OpenApiTransformationContext<HttpServletRequest> context) {
+        OpenAPI openApi = context.getSpecification();
+        context.request().ifPresent(httpServletRequest -> {
+            String xForwardedPrefix = httpServletRequest.getHeader(X_FORWARDED_PREFIX);
+            if (!StringUtils.isEmpty(xForwardedPrefix)) {
+                String[] prefixArr = xForwardedPrefix.split(COMMA);
+                if (prefixArr.length > 0) {
+                    String prefix = fixup(prefixArr[0]);
+                    List<Server> servers = openApi.getServers();
+                    for (Server server : servers) {
+                        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(server.getUrl());
+                        uriComponentsBuilder.path(prefix);
+                        UriComponents uriComponents = uriComponentsBuilder.build();
+                        server.setUrl(uriComponents.toUriString());
+                    }
+                }
+            }
+        });
+        return openApi;
+    }
+
+    @Override
+    public boolean supports(DocumentationType delimiter) {
+        return delimiter == DocumentationType.OAS_30;
+    }
+
+    private String fixup(String path) {
+        if (StringUtils.isEmpty(path)
+                || "/".equals(path)
+                || "//".equals(path)) {
+            return "/";
+        }
+        return StringUtils.trimTrailingCharacter(path.replace("//", "/"), '/');
+    }
+}
 ```
 
+实现SwaggerResourcesProvider实现路由转换为多definition。一般实现SwaggerResourcesProvider接口即可，这里我是继承InMemorySwaggerResourcesProvider
+来实现的，可以把gateway本身的接口也添加近definition中。
 
-## 三、简单登陆
+```java
+@Primary
+@Configuration
+public class GatewayRoutesOasSwaggerResourcesProvider extends InMemorySwaggerResourcesProvider {
+    protected static final String API_DOCS_URI = "/v3/api-docs";
+    private static final String SWAGGER_VERSION = "3.0";
+    private final RouteLocator routeLocator;
+    private final GatewayProperties gatewayProperties;
 
+    public GatewayRoutesOasSwaggerResourcesProvider(
+            RouteLocator routeLocator, GatewayProperties gatewayProperties,
+            Environment environment, DocumentationCache documentationCache, DocumentationPluginsManager pluginsManager) {
+        super(environment, documentationCache, pluginsManager);
+        this.routeLocator = routeLocator;
+        this.gatewayProperties = gatewayProperties;
+    }
 
+    @Override
+    public List<SwaggerResource> get() {
+        List<SwaggerResource> resources = new ArrayList<>();
+        resources.addAll(super.get());
+        List<String> routes = new ArrayList<>();
+        routeLocator.getRoutes().subscribe(route -> routes.add(route.getId()));
+        gatewayProperties.getRoutes().stream().filter(routeDefinition -> routes.contains(routeDefinition.getId())).forEach(route -> {
+            route.getPredicates().stream()
+                    .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
+                    .forEach(predicateDefinition -> resources.add(swaggerResource(route.getId(),
+                            predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
+                                    .replace("**", API_DOCS_URI))));
+        });
+        return resources;
+    }
 
-## 四、开发日志
+    private SwaggerResource swaggerResource(String name, String location) {
+        SwaggerResource swaggerResource = new SwaggerResource();
+        swaggerResource.setName(name);
+        swaggerResource.setLocation(location);
+        swaggerResource.setSwaggerVersion(SWAGGER_VERSION);
+        return swaggerResource;
+    }
+}
+```
+
+### 3.进行综合测试
+
+为方便测试，对biz-agg配置application.properties进行contextPath的调整，可以与biz-app对照
+
+```groovy
+server.servlet.context-path=/app-bizagg
+```
+
+修改网关对应的转发配置
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: route-app-bizagg
+          uri: lb://app-bizagg
+          predicates:
+            - Path=/app-bizagg/**
+#          filters:
+#            - StripPrefix=1
+```
+
+![](/pic/2021_10_04/gate_knife_doc.png)
+
+![](/pic/2021_10_04/gate_knife_doc_definitions.png)
+
+### 4.总结
+
+到这里在线文档聚合这个功能就已经完善了。其实还可以实现一个GlobalFilter去添加自定义header，并在swagger插件中对自定义header进行识别转换inferredServer地址，此处主要为了最小化代码量完成功能。
+
+## 三、开发日志
 
 
