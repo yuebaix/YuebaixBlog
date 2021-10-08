@@ -24,4 +24,4 @@ tags:        ["感悟"]
 
 (1925年10月在北京。原载1925年11月22日《文学周报》第200期)
 
-😭
+<span style="font-size: xxx-large">😭</span>
