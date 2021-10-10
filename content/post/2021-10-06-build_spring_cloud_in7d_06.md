@@ -9,6 +9,7 @@ image       = ""
 categories  = ["TECH"]
 tags        = ["干货", "教程"]
 showtoc     = true
+draft       = true
 +++
 
 项目地址：[jiuzhou (九州) https://github.com/yuebaix/jiuzhou](https://github.com/yuebaix/jiuzhou)
