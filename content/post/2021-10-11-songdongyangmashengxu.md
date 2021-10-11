@@ -6,8 +6,8 @@ author      = "月白"
 date        = 2021-10-11T12:48:27+08:00
 URL         = ""
 image       = ""
-categories  = ["TECH"]
-tags        = ["干货"]
+categories  = ["LIFE"]
+tags        = ["感悟"]
 +++
 
 <span style="text-align: center;display: block;font-weight: bold;font-size: x-large">《送东阳马生序》</span>
