@@ -1,6 +1,6 @@
 +++
 title       = "七天构建SpringCloud集群"
-subtitle    = "day7："
+subtitle    = "day7：中间件补全"
 description = ""
 author      = "月白"
 date        = 2021-10-07T19:00:00+08:00
