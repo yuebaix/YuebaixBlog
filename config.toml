@@ -1,4 +1,4 @@
-baseurl = "https://yuebaix.github.io"
+baseurl = "https://blog.yuebaix.com"
 title = "月白 Yuebaix Blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "zh-CN"
